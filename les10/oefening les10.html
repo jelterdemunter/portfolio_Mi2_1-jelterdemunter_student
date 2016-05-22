@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="us">
+	<head>
+		<meta charset="utf-8">
+		<title>Les 10</title>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" >
+		<link rel="stylesheet" href="themes/my-custom-theme.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script type="text/javascript">
+			
+        $(document).ready(function(){
+            $("#fotokapot").click(function(){
+            $("#fotokapot").attr('src','img/smiley_sad-512.png');
+            $("fotokapot").show();
+            });
+            
+            $('#fotokapot').on({
+    'click': function(){
+        $('#fotokapot').attr('src','second.jpg');
+    }
+});
+        });
+			
+		</script>
+	</head>
+	<body>
+				
+		<div data-role="page" id="home">
+			<div data-role="header">
+				<h1>Jelter Demunter</h1>
+			</div>
+
+			<div data-role="content">
+                
+				<div id="info" style="float: left; height: 50%">
+					<p>
+						mijn naam is Jelter Demunter
+					</p>
+					<p>
+						ik ben 18 jaar oud
+					</p>
+					<p>
+						ik woon in Sint-Genesius-Rode
+					</p>
+					<p>
+						mijn hobby's zijn volleybal en gamen
+					</p>
+				</div>
+				<img src="img/foto1.jpg" alt="profielfoto" title="profielfoto" style="float: right">
+
+				<a href="#kapotScherm" data-transition="slide" data-role="button" style="clear: both">Ga naar de volgende pagina</a>
+				<br>
+
+			</div>
+		</div>
+
+		<div data-role="page" id="kapotScherm">
+			<div data-role="header">
+				<h1>Foto</h1>
+			</div>
+			<div data-role="content">
+
+				<div id="fotoKapot">
+					<img src="img/smiley.png" alt="smiley" title="smiley" style="float: left">
+				</div>
+
+				<a href="#instellingen" data-transition="slide" data-role="button" style="clear: both">Ga naar de volgende pagina</a>
+                <a href="#home" data-transition="fade" data-role="button" style="clear: both" data-theme="b">Ga naar de vorige pagina</a>
+				<br>
+			</div>
+		</div>
+
+		<div data-role="page" id="instellingen">
+			<div data-role="header">
+				<h1>Instellingen</h1>
+			</div>
+
+			<div data-role="content">
+				<label for="select-choice-1" class="select">Wil je je fout herstellen?</label>
+				<select name="select-choice-1" id="select-choice-1">
+					<option value="default" disabled="disabled" selected="selected">Maak een keuze</option>
+					    <option value="ja">Ja</option>
+					    <option value="nee">Nee</option>
+					    <option value="weetniet">Ik weet het niet</option>
+				</select>
+
+				<button id="submit" type="submit" data-theme="b">
+					Submit
+				</button>
+				
+				<a href="#automerken" data-transition="slide" data-role="button" style="clear: both" data-theme="b">Ga naar de volgende pagina</a>
+
+			</div>
+
+		</div>
+
+		<div data-role="page" id="automerken">
+			<div data-role="header">
+				<h1>Automerken</h1>
+			</div>
+			
+			<div data-role="content">
+				<p>Automerken:</p>
+			</div>
+		</div>
+		
+	</body>
+</html>

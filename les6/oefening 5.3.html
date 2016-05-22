@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>Les1</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Steven" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		
+		
+<script  src="js/jquery-1.11.2.min.js"></script>
+
+		
+		<script type="text/javascript">
+			$(document).ready(function()
+			{	
+				//inhoud pagina langzaam zichtbaar
+				$("#foto1 img").fadeIn(10000);
+				
+				//afbeelding verbergen
+				$("#foto1 img").click(function(){
+					$("img").toggle("slow");
+				});
+				
+				// afbeeldiing vervangen
+				$("#foto1 img").click(function(){
+					$("img").fadeToggle("slow");
+				});
+			});
+		
+		
+	
+		</script>
+	</head>
+
+	<body>
+		
+		
+		<div id="foto1" style="text-align:center">	<img src=http://img.mobypicture.com/4784e2f8d760413b945c4e135be20278_large.jpg ></div>
+		<div id="foto2" src="http://img.mobypicture.com/ac9221b42e4852370dde2768686b999e_large.jpg"> </div>
+	</body>
+</html>

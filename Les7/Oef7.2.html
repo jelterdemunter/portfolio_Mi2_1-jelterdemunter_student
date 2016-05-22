@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+	<head>
+		<meta charset="utf-8" >
+		<meta name="description" content="beschrijving van de webpagina" >
+		<meta name="keywords" content="trefwoorden, gescheiden, door, komma's">
+		<title>oef 7.2</title>
+
+		<script src="js/jquery-1.11.2.min.js"></script>
+
+		<script type="text/javascript">
+			
+			function zoekFotos() {
+				var zoekterm = $("#zoekterm").val();
+				var flickUrl = "http://api.flickr.com/services/feeds" + "/photos_public.gne?format=json&tags=";
+				
+				$.ajax(
+					{
+						dataType: 'json',
+						type: "GET",
+						url: flickUrl + zoekterm + "&jsoncallback=?",
+						success: verwerkJSON
+					}
+				);
+			}
+			
+			
+			jsonFlickrFeed({
+				"title": "Recent Uploads tagged neederland",
+				"link": "http://www.flickr.com/photos/tags/nederland",
+				"description": " ",
+				"modified": "2012-04-01T13:16:44Z",
+				"generator": "http://www.flickr.com/",
+				"items": []
+			
+			
+			
+			function verwerkJSON(response) {
+				$("#fotos").html("");
+				for (var i = 0; i < response.items.length; i++) {
+					var foto = response.items[i];
+					var html = "<div class='frame'><div class='image'><a href='" + foto.link + "'><img src='" + foto.media.m + "' alt = '" + foto.title + "' /><a/></div><h2>" + foto.title + "</h2></div>"
+					$("#fotos").append(html);
+				}
+				$("#bron").attr("href", response.link).text("Bron: Flickr");
+				$("#titel").text(response.title);
+				
+			}
+			
+		</script>
+		
+		<style>
+			#fotos div.frame{
+				float: left;
+				width: 300px;
+				height: 240px;
+				background: #ccc;
+				margin: 10px;
+				padding: 0px;
+			}
+			
+			#fotos .image {
+				width: 300px;
+				height: 210px;
+				overflow: hidden;
+				background: #fff;
+			}
+			
+			#fotos .image img{
+				width: 100%;
+			}
+			
+			#fotos h2 {
+				font-family: Arial, sans-serif;
+				color: #333;
+				font-size: .9em;
+			}
+			
+			p {
+				clear: both;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<h1>jQuery - de Basis - Foto's</h1>
+		<p>
+			zoekterm:
+			<input type="text" id="zoekterm" />
+			<input type="button" value="zoek" id="zoek" />
+			<strong id="titel"> </strong>
+		</p>
+		
+		<div>
+			<p>
+				<a id="bron" href=" "> </a>
+			</p>
+		</div>
+
+	</body>
+</html>

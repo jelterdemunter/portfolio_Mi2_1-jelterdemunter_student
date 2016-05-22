@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>Les1</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Steven" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<style type="text/css">
+			div{
+				float: left;
+				
+			}
+			
+			.zwart{
+				background-color: greenyellow;
+				
+			}
+			.wit{
+				background-color: white;
+			}
+			.zwart,.wit{
+				
+				width: 50px;
+				height: 50px;
+			}
+			#bord{
+				width: 400px;
+				border-width: 2px;
+				border-color: black;
+			}
+		</style>	
+	
+	</head>
+
+	<body>
+		<!--&#9823 dit geld voor een pion-->
+		
+		<h1>schaakbord</h1>
+		
+		<div id="bord"> 
+		<script type="text/javascript">
+            var pion = "&#9823";
+            var tekens = new Array("&#9812","&#9813","&#9814","&#9815","&#9816","&#9817","&#9815","&#9814"); 
+            
+            
+			for(var rij = 0; rij < 4; rij++)
+			{    
+                
+               // if(rij = 0)
+                 //  {
+                   //     for(var arrayTekens1 = 0; arrayTekens1 <= tekens.length;arrayTekens1++)
+                     //       {
+                       //         document.write(tekens[arrayTekens])
+                         //   }
+                            
+                    //}
+                
+                //if(rij = 1)
+                  //  {
+                    //    for(var arrayTekens = 0; arrayTekens <= tekens.length;arrayTekens++)
+                      //      {
+                        //        document.write(pion)
+                          //  }
+                            
+                    //}
+                
+                
+				for(var i = 0; i< 8; i++)
+				{   var stukken = tekens[i];
+					if(i%2 == 0)
+					{
+						document.write('<div class="zwart">'+ stukken + '</div>' )
+					}
+					else
+					{
+						document.write('<div class="wit">' + stukken + '</div>' )
+					}
+				}
+			
+			
+				for(var j = 0; j< 8;j++)
+				{
+					if(j%2 == 0)
+					{
+						document.write('<div class="wit">'+ stukken + '</div>')
+					}
+					else
+					{
+						document.write('<div class="zwart">' + stukken + '</div>')
+					}
+				}
+			
+			}
+			
+		</script>
+		</div>
+	</body>
+</html>
