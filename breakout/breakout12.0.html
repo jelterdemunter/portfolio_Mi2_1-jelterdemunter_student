@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>breakout5.0</title>
+        <meta name="description" content="An interactive getting started guide for Brackets.">
+        <link rel="stylesheet" href="main.css">
+        
+        <style>
+    	canvas { background: #eee; }
+    </style>
+        
+    </head>
+    <body>
+        
+       <canvas id="myCanvas" width="500" height="600"></canvas>
+        
+        
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var kader = canvas.getContext("2d");
+            var straal = 10;
+            var x = canvas.width/2;
+            var y = canvas.height-30;
+            var dx = 4;
+            var dy = -4;
+            
+            var rijen = 5;
+            var kolommen = 10;
+            var balkenBreedte = 75;
+            var brickHeight = 20;
+            var balkenpadding = 10;
+            var balkenOffsetTop = 30;
+            var balkenOffsetLeft = 30;
+            
+            var balkHoogte = 10;
+            var balkBreedte = 75;
+            var balkX = (canvas.width-balkBreedte)/2;
+            var rightPressed = false;
+            var leftPressed = false;
+            
+            var score = 0;
+            var levens = 3;
+            var vullen = "#46EE1C";
+            var kleurBal = kader.fillStyle = vullen ;
+            
+            
+            
+            
+
+            
+
+            document.addEventListener("keydown", keyDownHandler, false);
+            document.addEventListener("keyup", keyUpHandler, false);
+            document.addEventListener("mousemove", mouseMoveHandler, false);
+
+            function keyDownHandler(e)
+            {
+                if(e.keyCode == 39)
+                {
+                    rightPressed = true;
+                }
+                    else if(e.keyCode == 37) {
+                    leftPressed = true;
+                }
+            }
+
+            function keyUpHandler(e)
+            {
+                if(e.keyCode == 39)
+                {
+                    rightPressed = false;
+                }
+                else if(e.keyCode == 37)
+                {
+                    leftPressed = false;
+                }
+            }
+
+            
+            function mouseMoveHandler(e)
+            {
+                var relativeX = e.clientX - canvas.offsetLeft;
+                if(relativeX > 0 && relativeX < canvas.width)
+                {
+                    balkX = relativeX - balkBreedte/2;
+    
+                }
+            }
+
+            
+            function tekenBal()
+            {
+                kader.beginPath();
+                kader.arc(x, y, straal, 0, Math.PI*2);
+                //kader.fillStyle = "#0095DD";
+                kleurBal;
+                kader.fill();
+                kader.closePath();
+            }
+
+            function tekenBalk()
+            {
+                kader.beginPath();
+                kader.rect(balkX, canvas.height-balkHoogte, balkBreedte, balkHoogte);
+                kader.fillStyle = "#0095DD";
+                kader.fill();
+                kader.closePath();
+            }
+            
+            var balken = [];
+            for(k=0; k<kolommen; k++)
+            {
+                balken[k] = [];
+                for(r=0; r<rijen; r++)
+                {
+                    balken[k][r] = { x: 0, y: 0, status: 1 };
+                }
+            }
+            
+            function collisionDetection()
+            {
+                for(k=0; k<kolommen; k++)
+                {
+                    for(r=0; r<rijen; r++)
+                    {
+                        var b = balken[k][r];
+                        if(b.status == 1)
+                        {
+                            if(x > b.x && x < b.x+balkenBreedte && y > b.y && y < b.y+brickHeight)
+                            {
+                                dy = -dy;
+                                b.status = 0;
+                                score++;
+                                if(score == rijen*kolommen)
+                                {
+                                    alert("YOU WIN, CONGRATS!");
+                                    document.location.reload();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            
+
+            
+            function tekenBalken()
+            {
+    
+                var kleuren = new Array("blue", "green", "chartreuse", "yellow", "red", "orange", "brown", "black", "purple", "deeppink");
+    
+                for(k=0; k<kolommen; k++)
+                {
+                    for(r=0; r<rijen; r++)
+                    {
+                        var kleur = kleuren[k]
+                        if(balken[k][r].status == 1)
+                        {
+                            var brickX = (r*(balkenBreedte+balkenpadding))+balkenOffsetLeft;
+                            var brickY = (k*(brickHeight+balkenpadding))+balkenOffsetTop;
+                
+                            
+                            balken[k][r].x = brickX;
+                            balken[k][r].y = brickY;
+                
+                            kader.beginPath();
+                            kader.rect(brickX, brickY, balkenBreedte, brickHeight);
+                            kader.fillStyle = kleur;
+                            kader.fill();
+                            kader.closePath();
+                        }
+                    }
+                }
+            }
+
+
+            function tekenScore()
+            {
+                kader.font = "16px Arial";
+                kader.fillStyle = "#0095DD";
+                kader.fillText("Score: "+score, 8, 20);
+            }
+            function tekenLevens()
+            {
+                kader.font = "16px Arial";
+                kader.fillStyle = "#0095DD";
+                kader.fillText("Lives: "+levens, canvas.width-65, 20);
+            }
+
+            function draw()
+            {
+                kader.clearRect(0, 0, canvas.width, canvas.height);
+                tekenBalken();
+                tekenBal();
+                tekenBalk();
+                tekenScore();
+                tekenLevens();
+                collisionDetection();
+    
+    
+                
+    
+                if(y + dy < straal)
+                {
+                    dy = -dy;
+                }else if(y + dy > canvas.height-straal)
+                {
+                    if(x > balkX && x < balkX + balkBreedte)
+                    {
+                        dy = -dy;
+                    }
+                        else
+                        {
+                            levens--;
+                            if(!levens)
+                            {
+                                alert("GAME OVER" + "\n score:" + score);
+                                document.location.reload();
+                            }
+                            else
+                            {
+                                x = canvas.width/2;
+                                y = canvas.height-30;
+                                dx = 3;
+                                dy = -3;
+                                balkX = (canvas.width-balkBreedte)/2;
+                            }
+                        }
+                }
+    
+                
+                if(x + dx > canvas.width-straal || x + dx < straal)
+                {
+                    dx = -dx;
+                }
+                       
+                
+                
+                
+                if(rightPressed && balkX < canvas.width-balkBreedte)
+                {
+                    balkX += 7;
+                }
+                else if(leftPressed && balkX > 0)
+                {
+                    balkX -= 7;
+                }
+    
+                x += dx;
+                y += dy;
+                requestAnimationFrame(draw);
+            }
+
+                        draw();
+        </script>
+        
+    </body>
+</html>
