@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <!-- Examen Mobile & Internet 2   -->
+  <!-- Naam student     : Roelands Antony          -->
+  <!-- Studentennummer  : r0458240         -->
+  <meta charset="utf-8">		
+
+  <title></title>
+  <meta name="description" content="">
+  <meta name="author" content="Roelands Antony">
+    
+    <script src="js/jquery-3.3.1.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+	<script type="text/javascript">
+     
+    $(document).ready(function() {
+		var artiest = document.getElementById('artiest').value;
+		
+		$("#button").on("click", function() {
+					$.ajax({
+						dataType : 'json',
+						type : "GET",
+						url : 'http://maps.googleapis.com/maps/api/geocode/json?address=Sint-Genesius-Rode,Belgie',
+						success : verwerkJSON
+					});
+				});
+		
+		
+		function verwerkJSON(response){
+			
+			for (var i = 0; i < response.results.length; i++) {
+						var resultaten = response.results[i];
+
+						var long_name = resultaten.long_name;
+						var short_name = resultaten.short_name;
+						
+
+						$("#overzicht tbody").append("<tr><td id='longLink'>" + song + "</td><td id='shortLink'>" + title + "</td></tr>"
+													
+						)};
+
+					$("#overzicht tbody tr:odd").css("background-color", "#ccc");
+					$("#overzicht tbody tr:even").css("background-color", "#eee");
+
+					loaded = true;
+		}
+		
+		
+		
+		
+	
+	});
+      
+      
+          
+         
+         
+      
+</script>
+
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+
+<body>
+<label for="zoeken" id="artiest"></label>
+<input type="text" name="artiesten" id="zoeken">
+	
+<button id="button"> zoeken</button>
+	
+			<div>
+				<a href="#pageOverzicht" class="ui-btn">Overzicht</a>
+				
+			</div>
+    
+
+
+
+</body>
+</html>

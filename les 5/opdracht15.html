@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <!-- Examen Mobile & Internet 2   -->
+  <!-- Naam student     : Roelands Antony          -->
+  <!-- Studentennummer  : r0458240         -->
+  <meta charset="utf-8">		
+
+  <title></title>
+  <meta name="description" content="">
+  <meta name="author" content="Roelands Antony">
+    
+    <script src="js/jquery-3.3.1.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+	<script type="text/javascript">
+     
+    $(document).ready(function() {
+		var artiest = document.getElementById('artiest').value;
+		
+		$("#button").on("click", function() {
+					$.ajax({
+						dataType : 'json',
+						type : "GET",
+						url : 'http://www.songsterr.com/a/ra/songs/byartists.json?artists=artiest',
+						success : verwerkJSON
+					});
+				});
+		
+		
+		function verwerkJSON(response){
+			
+			for (var i = 0; i < response.PLAYER.length; i++) {
+						var PLAYERINFO = response.PLAYER[i];
+
+						var song = PLAYERINFO.song;
+						var title = PLAYERINFO.title;
+						
+
+						$("#overzicht tbody").append("<tr><td id='songLink'>" + song + "</td><td id='titleLink'>" + title + "</td></tr>"
+													
+						)};
+
+					$("#overzicht tbody tr:odd").css("background-color", "#ccc");
+					$("#overzicht tbody tr:even").css("background-color", "#eee");
+
+					loaded = true;
+		}
+		
+		
+		
+		
+	
+	});
+      
+      
+          
+         
+         
+      
+</script>
+
+	
+	
+	
+	
+	
+	
+	
+	
+</head>
+
+<body>
+<label for="zoeken" id="artiest"></label>
+<input type="text" name="artiesten" id="zoeken">
+	
+<button id="button"> zoeken</button>
+	
+			<div>
+				<a href="#pageOverzicht" class="ui-btn">Overzicht</a>
+				
+			</div>
+    
+
+
+
+</body>
+</html>
